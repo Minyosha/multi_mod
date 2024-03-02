@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<h2>View taskModels</h2>
+<table border="1">
+    <tr class="headerRow">
+        <th>id</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created</th>
+    </tr>
+    <tr th:each="t: ${taskModels}">
+        <td th:text="${t.id}"></td>
+        <td th:text="${t.description}"></td>
+        <td th:text="${t.status}"></td>
+        <td th:text="${t.created}"></td>
+    </tr>
+</table>
+
+<h2>View taskModels by status</h2>
+<a th:href="@{/taskModels-by-status}">View taskModels by status</a>
+
+
+<h2>Add a taskModel</h2>
+<form th:action="@{/taskModels}" method="post">
+    Description: <input type="text" name="description" th:value="${taskModel?.description}"/>
+    Status: <select name="status">
+    <option value="NOT_STARTED" th:selected="${taskModel?.status == 'NOT_STARTED'}">Not Started</option>
+    <option value="IN_PROGRESS" th:selected="${taskModel?.status == 'IN_PROGRESS'}">In Progress</option>
+    <option value="COMPLETED" th:selected="${taskModel?.status == 'COMPLETED'}">Completed</option>
+</select>
+    <button type="submit">Add taskModel</button>
+</form>
+
+<h2>Update a taskModel by id</h2>
+<form th:action="@{/taskModels-update-by-id}" method="post">
+    <input type="number" name="id" placeholder="Enter ID to update" required>
+    Status: <select name="status">
+    <option value="NOT_STARTED" th:selected="${taskModel?.status == 'NOT_STARTED'}">Not Started</option>
+    <option value="IN_PROGRESS" th:selected="${taskModel?.status == 'IN_PROGRESS'}">In Progress</option>
+    <option value="COMPLETED" th:selected="${taskModel?.status == 'COMPLETED'}">Completed</option>
+</select>
+    <button type="submit">Update taskModel by ID</button>
+</form>
+
+<h2>Delete a taskModel by id</h2>
+<form th:action="@{/taskModels-delete-by-id}" method="post">
+    <input type="number" name="id" placeholder="Enter ID to delete" required>
+    <button type="submit">Delete taskModel by ID</button>
+</form>
+
+<h2>Delete all taskModels</h2>
+<form th:action="@{/taskModels-deleteAll}" method="post">
+    <input type="submit" value="Delete all taskModels">
+</form>
+</body>
+</html>

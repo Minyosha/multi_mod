@@ -1,0 +1,1 @@
+insert into taskModels (description, status, created) values ('Create a taskModel', 'NOT_STARTED', now());

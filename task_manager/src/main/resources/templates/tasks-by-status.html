@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<h2>View all taskModels</h2>
+<a th:href="@{/taskModels}">View all taskModels</a>
+
+<h2>View taskModels by status</h2>
+<form th:action="@{/taskModels-by-status}" method="post">
+    Status: <select name="status">
+    <option value="NOT_STARTED" th:selected="${status == 'NOT_STARTED'}">Not Started</option>
+    <option value="IN_PROGRESS" th:selected="${status == 'IN_PROGRESS'}">In Progress</option>
+    <option value="COMPLETED" th:selected="${status == 'COMPLETED'}">Completed</option>
+</select>
+    <button type="submit">View taskModels by status</button>
+</form>
+<table border="1">
+    <tr class="headerRow">
+        <th>id</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created</th>
+    </tr>
+    <tr th:each="t: ${taskModels}">
+        <td th:text="${t.id}"></td>
+        <td th:text="${t.description}"></td>
+        <td th:text="${t.status}"></td>
+        <td th:text="${t.created}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

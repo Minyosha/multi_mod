@@ -1,0 +1,20 @@
+server:
+  port: 8082
+spring:
+  cloud:
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+  application:
+    name: apiGateWay
+    gateway:
+      routes:
+        - id: tasks
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/tasks/**
+        - id: print
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/print/**
